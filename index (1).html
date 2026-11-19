@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pamoja Kilimo — Kenya's Farm Marketplace</title>
+<meta name="description" content="Buy farm inputs and fresh produce directly from Kenyan farmers. M-Pesa payment, door delivery, pickup points and courier.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="left">
+      <span class="loc">📍 Delivering to: <b id="locLabel">Nairobi, Kenya</b></span>
+      <a href="#" onclick="changeLocation();return false">Change</a>
+    </div>
+    <div class="right">
+      <span class="mpesa-badge">M-PESA ACCEPTED</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="site">
+  <div class="wrap">
+    <a href="#" class="logo" onclick="goHome();return false">
+      <div class="mark">🌱</div>
+      <div class="txt">
+        <b>Pamoja Kilimo</b>
+        <span>Kenya's Farm Marketplace</span>
+      </div>
+    </a>
+    <div class="search">
+      <span>🔍</span>
+      <input id="searchInput" type="text" placeholder="Search seeds, fertilizer, tomatoes, tools..." oninput="onSearch()">
+      <button class="go" onclick="onSearch()">Search</button>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="openSeller()">
+        <span class="ico">🏪</span><span class="lbl">Seller</span>
+      </button>
+      <button class="icon-btn" onclick="openOrders()">
+        <span class="ico">📦</span><span class="lbl">Orders</span>
+      </button>
+      <button class="icon-btn" onclick="openCart()">
+        <span class="ico">🛒</span><span class="lbl">Cart</span>
+        <span id="cartCount" class="cart-count hidden">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap">
+    <h1>From shamba to your hands.<br>Buy inputs &amp; fresh produce from Kenyan farmers.</h1>
+    <p>Verified farmers across Kiambu, Nakuru, Eldoret, Meru &amp; more. Pay with M-Pesa, choose door delivery, pickup point or courier.</p>
+    <div class="cta-row">
+      <a href="#catalog" class="btn btn-primary">Shop the catalog →</a>
+      <a href="#farmers" class="btn btn-ghost">Meet our farmers</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>1,240+</b><span>Verified farmers</span></div>
+      <div class="stat"><b>38</b><span>Counties served</span></div>
+      <div class="stat"><b>24h</b><span>Avg. Nairobi delivery</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST ===== -->
+<section class="trust">
+  <div class="wrap">
+    <div class="item"><span class="ico">✅</span><div><b>Verified farmers</b><span>Each seller is vetted &amp; location-checked</span></div></div>
+    <div class="item"><span class="ico">📲</span><div><b>M-Pesa STK push</b><span>Pay securely from your phone</span></div></div>
+    <div class="item"><span class="ico">🚚</span><div><b>Flexible delivery</b><span>Door, pickup point or courier</span></div></div>
+    <div class="item"><span class="ico">🌾</span><div><b>Inputs &amp; produce</b><span>One marketplace, everything you need</span></div></div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- ===== CATEGORIES ===== -->
+  <div class="cats" id="cats">
+    <div class="scroll" id="catScroll"></div>
+  </div>
+
+  <!-- ===== CATALOG ===== -->
+  <section id="catalog">
+    <div class="section-head">
+      <div>
+        <h2>Farm Marketplace</h2>
+        <span class="sub">Prices in Kenya Shillings (KES). Stock from real farmer listings.</span>
+      </div>
+    </div>
+    <div class="toolbar">
+      <span class="result" id="resultCount">Loading products…</span>
+      <select id="sortSel" onchange="renderProducts()">
+        <option value="popular">Sort: Most popular</option>
+        <option value="priceLow">Price: Low to High</option>
+        <option value="priceHigh">Price: High to Low</option>
+        <option value="rating">Highest rated</option>
+      </select>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- ===== FARMERS ===== -->
+  <section id="farmers" style="margin-top:42px">
+    <div class="section-head">
+      <div>
+        <h2>Featured Farmers &amp; Sellers</h2>
+        <span class="sub">Buy directly from the people who grow and source the goods.</span>
+      </div>
+    </div>
+    <div class="farmers" id="farmersGrid"></div>
+  </section>
+
+</main>
+
+<!-- ===== SELLER VIEW ===== -->
+<section id="sellerView" class="hidden"></section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="grid-f">
+    <div class="brand">
+      <div class="logo" style="filter:brightness(0) invert(1)">
+        <div class="mark" style="background:rgba(255,255,255,.15)">🌱</div>
+        <div class="txt"><b style="color:#fff">Pamoja Kilimo</b><span style="color:#a8c8aa">Kenya's Farm Marketplace</span></div>
+      </div>
+      <p>Connecting Kenyan farmers directly with buyers — fair prices, verified sellers, M-Pesa payment and reliable delivery nationwide.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#catalog" onclick="setCat('seeds')">Seeds</a></li>
+        <li><a href="#catalog" onclick="setCat('fertilizer')">Fertilizer</a></li>
+        <li><a href="#catalog" onclick="setCat('chemicals')">Agrochemicals</a></li>
+        <li><a href="#catalog" onclick="setCat('tools')">Farm Tools</a></li>
+        <li><a href="#catalog" onclick="setCat('produce')">Fresh Produce</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#" onclick="toast('Demo: How to order guide');return false">How to order</a></li>
+        <li><a href="#" onclick="toast('Demo: M-Pesa payment help');return false">M-Pesa payment</a></li>
+        <li><a href="#" onclick="toast('Demo: Delivery &amp; pickup info');return false">Delivery &amp; pickup</a></li>
+        <li><a href="#" onclick="toast('Demo: Returns policy');return false">Returns policy</a></li>
+        <li><a href="#" onclick="toast('Demo: Contact farmer support');return false">Contact support</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Sell on Pamoja Kilimo</h4>
+      <ul>
+        <li><a href="#" onclick="toast('Demo: Farmer registration');return false">Register as a farmer</a></li>
+        <li><a href="#" onclick="toast('Demo: Agrovet listings');return false">List as an agrovet</a></li>
+        <li><a href="#" onclick="toast('Demo: Become a pickup point');return false">Become a pickup point</a></li>
+        <li><a href="#" onclick="toast('Demo: Partner with us');return false">Partner with us</a></li>
+      </ul>
+      <h4 style="margin-top:16px">We accept</h4>
+      <div class="pay"><span>M-Pesa</span><span>Cash on delivery</span></div>
+    </div>
+  </div>
+  <div class="bottom">
+    © 2026 Pamoja Kilimo · A demo agriculture e-commerce concept for Kenya · Built for showcase purposes. M-Pesa flow is simulated.
+  </div>
+</footer>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+<aside class="drawer" id="cartDrawer">
+  <div class="head">
+    <h3>🛒 Your Cart</h3>
+    <button class="close" onclick="closeCart()">×</button>
+  </div>
+  <div class="body" id="cartBody"></div>
+  <div class="foot" id="cartFoot"></div>
+</aside>
+
+<!-- ===== MODAL (product / checkout / orders) ===== -->
+<div class="modal" id="modal">
+  <div class="box">
+    <div class="head">
+      <h3 id="modalTitle">Title</h3>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+    <div class="body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
